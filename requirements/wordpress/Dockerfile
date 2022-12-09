@@ -4,10 +4,17 @@ RUN apk update && apk add php7 php7-fpm php7-phar php-json php-mysqli \
 	&& wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
 	&& chmod +x  wp-cli.phar \
 	&& mv wp-cli.phar /usr/local/bin/wp \
-	&& wp core download --allow-root;
+	&& adduser -S nginx \
+	&& addgroup -S nginx
 
-COPY conf/wp-config.php /
+COPY conf/www.conf /etc/php7/php-fpm.d
 
 EXPOSE 9000
 
-ENTRYPOINT ["wp", "shell"]
+WORKDIR /var/www/html/wordpress/
+
+RUN  wp core download --allow-root
+
+#COPY conf/wp-config.php /var/www/html/wordpress/
+
+ENTRYPOINT ["/usr/sbin/php-fpm7", "-F"]

@@ -1,6 +1,8 @@
 #links establish a link between two services so they are added to known host list
 #depends_on is used to define in what order services must start and stop
 #
+version: '3'
+
 services:
   
   nginx:
@@ -11,13 +13,15 @@ services:
     ports:
       - "443:443"
     networks:
-      - inception
+      - "inception"
+    volumes:
+      - "/home/ccottin/data/wordpress:/var/www/html"
 #
   mariadb:
     depends_on:
       - nginx
-    links:
-      - nginx
+#    links:
+#      - nginx
     container_name: mariadb
     env_file: .env
     restart: unless-stopped
@@ -25,13 +29,12 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - /home/ccottin/data/mariadb:/var/lib/mysql
+      - "/home/ccottin/data/mariadb:/var/lib/mysql"
     networks:
       - inception
-#
+
   wordpress:
     container_name: wordpress
-#   link: mariadb
     depends_on:
       - mariadb
     env_file: .env
@@ -40,7 +43,7 @@ services:
     ports:
       - "9000:9000"
     volumes:
-      - /home/ccottin/data/wordpress:/var/www/html
+      - "/home/ccottin/data/wordpress:/var/www/html"
     networks:
       - inception
 #
