@@ -20,8 +20,6 @@ services:
   mariadb:
     depends_on:
       - nginx
-#    links:
-#      - nginx
     container_name: mariadb
     env_file: .env
     restart: unless-stopped

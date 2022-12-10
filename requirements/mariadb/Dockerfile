@@ -1,19 +1,21 @@
 FROM alpine:3.15
 
-COPY ./conf/my.cnf /etc/mysql/
-
-EXPOSE 3306
-RUN apk update && apk add mariadb mariadb-client\
+RUN apk update && apk upgrade && apk add mariadb mariadb-client \
 	&& mkdir -p /run/mysqld \
 	&& chown -R mysql:mysql /run/mysqld \
-#	&& chown -R mysql:mysql /var/lib/mysql \
-#	&& /usr/bin/mariadb setup \
-	&& mysql_install_db --user=mysql --datadir=/var/lib/mysql
-
-
-#COPY tools/entrypoint.sh /tmp/
+	&& chown -R mysql:mysql /var/lib/mysql 
 
 EXPOSE 3306
 
-#ENTRYPOINT ["sh", "/tmp/entrypoint.sh"]
+COPY ./conf/my.cnf /etc/mysql/
+COPY tools/entrypoint.sh /tmp/
+
+RUN chmod +x /tmp/entrypoint.sh
+
+ENTRYPOINT ["/tmp/entrypoint.sh"]
+
+STOPSIGNAL SIGQUIT
+
+CMD ["mysqld_safe"]
+
 

@@ -1,9 +1,0 @@
-# this is read by the standalone daemon and embedded servers
-[server]
-user=mysql
-# this is only for the mysqld standalone daemon
-[mysqld]
-user = mysql
-skip-networking = false
-socket = /var/run/mysqld/mysqld.sock
-bind-address=0.0.0.0
