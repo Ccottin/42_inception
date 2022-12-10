@@ -1,12 +1,12 @@
 <?php
 
-define('DB_NAME', $DB_NAME);
+define('DB_NAME', 'wordpress');
 
-define('DB_USER', $DB_USER);
+define('DB_USER', 'ccottin');
 
-define('DB_PASSWORD', $DB_PASSWORD);
+define('DB_PASSWORD', 'paceworD3');
 
-define('DB_HOST', $MYSQLHOST);
+define('DB_HOST', 'localhost');
 
 if ( ! defined( 'ABSPATH' ) ) {
 	define( 'ABSPATH', __DIR__ . '/' );

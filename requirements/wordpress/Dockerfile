@@ -8,13 +8,12 @@ RUN apk update && apk add php7 php7-fpm php7-phar php-json php-mysqli \
 	&& addgroup -S nginx
 
 COPY conf/www.conf /etc/php7/php-fpm.d
+COPY conf/wp-config.php /var/www/html/wordpress/
 
 EXPOSE 9000
 
 WORKDIR /var/www/html/wordpress/
 
-RUN  wp core download --allow-root
+#RUN  wp core download --allow-root && wp core install
 
-#COPY conf/wp-config.php /var/www/html/wordpress/
-
-ENTRYPOINT ["/usr/sbin/php-fpm7", "-F"]
+#ENTRYPOINT ["/usr/sbin/php-fpm7", "-F"]

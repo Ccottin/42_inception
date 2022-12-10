@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ ! -d /var/lib/mysql/wordpress ]; then
+if [ ! -d /var/lib/mysql/$DB_NAME ]; then
   mysql_install_db
   /usr/share/mariadb/mysql.server start
   mysql -e "\
