@@ -15,7 +15,7 @@ services:
     networks:
       - "inception"
     volumes:
-      - "/home/ccottin/data/wordpress:/var/www/html"
+      - "/home/ccottin/data/wordpress:/var/www/wordpress"
 #
   mariadb:
     depends_on:
@@ -41,7 +41,7 @@ services:
     ports:
       - "9000:9000"
     volumes:
-      - "/home/ccottin/data/wordpress:/var/www/html"
+      - "/home/ccottin/data/wordpress:/var/www/wordpress"
     networks:
       - inception
 #
