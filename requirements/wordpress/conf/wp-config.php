@@ -6,7 +6,7 @@ define('DB_USER', 'ccottin');
 
 define('DB_PASSWORD', 'paceworD3');
 
-define('DB_HOST', 'localhost');
+define('DB_HOST', 'ccottin.42.fr');
 
 if ( ! defined( 'ABSPATH' ) ) {
 	define( 'ABSPATH', __DIR__ . '/' );

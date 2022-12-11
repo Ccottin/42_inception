@@ -8,6 +8,7 @@ RUN apk update && apk upgrade && apk add mariadb mariadb-client \
 EXPOSE 3306
 
 COPY ./conf/my.cnf /etc/mysql/
+COPY ./conf/mariadb-server.cnf /etc/my.cnf.d/
 COPY tools/entrypoint.sh /tmp/
 
 RUN chmod +x /tmp/entrypoint.sh

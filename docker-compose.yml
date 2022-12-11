@@ -30,7 +30,7 @@ services:
       - "/home/ccottin/data/mariadb:/var/lib/mysql"
     networks:
       - inception
-
+  #
   wordpress:
     container_name: wordpress
     depends_on:

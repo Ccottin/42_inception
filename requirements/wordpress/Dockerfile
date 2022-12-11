@@ -14,6 +14,8 @@ EXPOSE 9000
 
 WORKDIR /var/www/html/wordpress/
 
+CMD ["sleep", "100000"]
+
 #RUN  wp core download --allow-root && wp core install
 
 #ENTRYPOINT ["/usr/sbin/php-fpm7", "-F"]
