@@ -7,6 +7,7 @@ services:
   
   nginx:
     container_name: nginx
+    image: nginx
     env_file: .env
     restart: unless-stopped
     build: ./requirements/nginx
@@ -21,6 +22,7 @@ services:
     depends_on:
       - nginx
     container_name: mariadb
+    image: mariadb
     env_file: .env
     restart: unless-stopped
     build: ./requirements/mariadb
@@ -33,6 +35,7 @@ services:
   #
   wordpress:
     container_name: wordpress
+    image: wordpress
     depends_on:
       - mariadb
     env_file: .env
@@ -41,7 +44,9 @@ services:
     ports:
       - "9000:9000"
     volumes:
-      - "/home/ccottin/data/wordpress:/var/www/wordpress"
+      - type: volume
+      source: :/var/www/wordpress"
+      target: "/home/ccottin/data/wordpress"
     networks:
       - inception
 #

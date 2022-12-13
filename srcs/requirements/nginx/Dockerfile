@@ -6,8 +6,6 @@ RUN mkdir /etc/nginx/ssl
 
 COPY conf/default.conf /etc/nginx/http.d/default.conf
 
-COPY index.html /var/www/
-
 RUN openssl req -x509 -outform PEM -out /etc/nginx/ssl/ccottin.42.fr.crt\
 	-newkey rsa:4096 -nodes\
 	-keyout /etc/nginx/ssl/ccottin.42.fr.key\
