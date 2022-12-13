@@ -14,10 +14,10 @@ services:
     ports:
       - "443:443"
     networks:
-      - "inception"
+      - inception
     volumes:
-      - "/home/ccottin/data/wordpress:/var/www/wordpress"
-#
+    - "wordpress:/var/www/wordpress"
+  #
   mariadb:
     depends_on:
       - nginx
@@ -28,10 +28,10 @@ services:
     build: ./requirements/mariadb
     ports:
       - "3306:3306"
-    volumes:
-      - "/home/ccottin/data/mariadb:/var/lib/mysql"
     networks:
       - inception
+    volumes:
+      - "maria:/var/lib/mysql"
   #
   wordpress:
     container_name: wordpress
@@ -43,13 +43,25 @@ services:
     build: ./requirements/wordpress
     ports:
       - "9000:9000"
-    volumes:
-      - type: volume
-      source: :/var/www/wordpress"
-      target: "/home/ccottin/data/wordpress"
     networks:
       - inception
+    volumes:
+      - "wordpress:/var/www/wordpress"
 #
 networks:
   inception:
     driver: bridge
+#
+volumes:
+  wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/ccottin/data/wordpress
+  maria:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/ccottin/data/mariadb

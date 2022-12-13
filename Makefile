@@ -17,10 +17,12 @@ start :
 stop :
 	docker compose -f ./srcs/docker-compose.yml stop
 
-clean : stop prune
+down :
+	docker compose -f ./srcs/docker-compose.yml down
 	sudo hostsed rm 127.0.0.1 ccottin.42.fr
-	rm -rf /home/ccottin/data/
+
+clean : down prune
 
 reload : clean all
 
-.PHONY : reload install start stop up all clean
+.PHONY : reload install start stop up all clean down
