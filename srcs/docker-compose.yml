@@ -11,8 +11,6 @@ services:
     env_file: .env
     restart: unless-stopped
     build: ./requirements/nginx
-    ports:
-      - "443:443"
     networks:
       - inception
     volumes:
@@ -26,8 +24,6 @@ services:
     env_file: .env
     restart: unless-stopped
     build: ./requirements/mariadb
-    ports:
-      - "3306:3306"
     networks:
       - inception
     volumes:
@@ -41,8 +37,6 @@ services:
     env_file: .env
     restart: unless-stopped
     build: ./requirements/wordpress
-    ports:
-      - "9000:9000"
     networks:
       - inception
     volumes:
