@@ -3,9 +3,10 @@
 
 cd /var/www/wordpress/
 
-if [ ! -d wp-content ]; then
+while [ ! -d wp-content ]
+do
 wp core download --allow-root 
-fi
+done
 
 wp core is-installed
 if [ $? -eq 1 ]; then

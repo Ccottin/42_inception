@@ -30,8 +30,6 @@ services:
       - inception
     volumes:
       - "maria:/var/lib/mysql"
-#    ports:
-#    - "3306:3306"
   #
   wordpress:
     container_name: wordpress
@@ -45,8 +43,6 @@ services:
       - inception
     volumes:
       - "wordpress:/var/www/wordpress"
-#    ports:
-#    - "9000:9000"
 #
 networks:
   inception:

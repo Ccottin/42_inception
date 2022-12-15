@@ -19,6 +19,4 @@ COPY ./tools/entrypoint.sh /tmp/entrypoint.sh
 
 RUN chmod 777 /tmp/entrypoint.sh
 
-#CMD ["sleep", "100000"]
-
 ENTRYPOINT ["/tmp/entrypoint.sh"]
