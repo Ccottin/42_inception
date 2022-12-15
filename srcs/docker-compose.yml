@@ -7,7 +7,7 @@ services:
 #  
   nginx:
     depends_on:
-      - mariadb
+      - wordpress
     container_name: nginx
     image: nginx
     env_file: .env
@@ -19,7 +19,7 @@ services:
     - "443:443"
     volumes:
     - "wordpress:/var/www/wordpress"
-  #
+#
   mariadb:
     container_name: mariadb
     image: mariadb
@@ -28,14 +28,17 @@ services:
     build: ./requirements/mariadb
     networks:
       - inception
+    healthcheck:
+      test: "mariadb --password=$MARIADB_ROOT_PASSWORD --execute \"SHOW DATABASES;\""
     volumes:
       - "maria:/var/lib/mysql"
-  #
+#
   wordpress:
     container_name: wordpress
     image: wordpress
     depends_on:
-      - mariadb
+        mariadb:
+          condition: service_healthy
     env_file: .env
     restart: unless-stopped
     build: ./requirements/wordpress
